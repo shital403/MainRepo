@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.fashionstore.FashionStoreApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.290 s -- in com.fashionstore.FashionStoreApplicationTests

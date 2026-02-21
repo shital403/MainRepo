@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionStore - Your Online Clothing Destination</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; color: #333; }
+        header { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { font-size: 2rem; letter-spacing: 2px; }
+        header p { opacity: 0.8; font-size: 0.9rem; }
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 80px 20px; }
+        .hero h2 { font-size: 3rem; margin-bottom: 15px; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 30px; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.2); border: 2px solid white; padding: 10px 25px; border-radius: 25px; font-size: 1rem; font-weight: 600; }
+        .section { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
+        .section h2 { font-size: 1.8rem; margin-bottom: 30px; color: #1a1a2e; border-left: 4px solid #667eea; padding-left: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .card h3 { color: #1a1a2e; margin-bottom: 10px; font-size: 1.2rem; }
+        .card p { color: #666; font-size: 0.95rem; line-height: 1.6; }
+        .endpoint { background: #f0f4ff; border-left: 3px solid #667eea; padding: 8px 15px; margin: 8px 0; border-radius: 0 8px 8px 0; font-family: monospace; font-size: 0.9rem; }
+        .method { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-right: 8px; }
+        .get { background: #d4edda; color: #155724; }
+        .post { background: #cce5ff; color: #004085; }
+        .put { background: #fff3cd; color: #856404; }
+        .delete { background: #f8d7da; color: #721c24; }
+        .credentials { background: #1a1a2e; color: #fff; padding: 20px 25px; border-radius: 12px; font-family: monospace; }
+        .credentials .label { color: #667eea; }
+        footer { background: #1a1a2e; color: #aaa; text-align: center; padding: 30px; margin-top: 40px; }
+        footer a { color: #667eea; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>👗 FashionStore</h1>
+        <p>Your Online Clothing Destination</p>
+    </div>
+    <div>
+        <span style="background:#667eea;padding:8px 20px;border-radius:20px;font-size:0.9rem;">REST API v1.0</span>
+    </div>
+</header>
+
+<div class="hero">
+    <h2>Welcome to FashionStore API</h2>
+    <p>A full-stack e-commerce platform built with Java Spring Boot 3.2, JWT Security &amp; Razorpay Payments</p>
+    <span class="badge">🚀 Server Running on Port 8080</span>
+</div>
+
+<div class="section">
+    <h2>🔑 Authentication</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Default Admin Credentials</h3>
+            <div class="credentials">
+                <div><span class="label">Email:</span> admin@fashionstore.com</div>
+                <div><span class="label">Password:</span> Admin@123</div>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Auth Endpoints</h3>
+            <div class="endpoint"><span class="method post">POST</span>/api/auth/login</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/auth/register</div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>📦 API Endpoints</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>🛍️ Products</h3>
+            <div class="endpoint"><span class="method get">GET</span>/api/products</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/products/{id}</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/products/search?keyword=</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/admin/products</div>
+            <div class="endpoint"><span class="method put">PUT</span>/api/admin/products/{id}</div>
+            <div class="endpoint"><span class="method delete">DELETE</span>/api/admin/products/{id}</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/admin/products/{id}/image</div>
+        </div>
+        <div class="card">
+            <h3>📂 Categories</h3>
+            <div class="endpoint"><span class="method get">GET</span>/api/categories</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/categories/{id}</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/admin/categories</div>
+            <div class="endpoint"><span class="method put">PUT</span>/api/admin/categories/{id}</div>
+            <div class="endpoint"><span class="method delete">DELETE</span>/api/admin/categories/{id}</div>
+        </div>
+        <div class="card">
+            <h3>🛒 Cart (Authenticated)</h3>
+            <div class="endpoint"><span class="method get">GET</span>/api/cart</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/cart/add</div>
+            <div class="endpoint"><span class="method put">PUT</span>/api/cart/items/{itemId}</div>
+            <div class="endpoint"><span class="method delete">DELETE</span>/api/cart/items/{itemId}</div>
+            <div class="endpoint"><span class="method delete">DELETE</span>/api/cart/clear</div>
+        </div>
+        <div class="card">
+            <h3>📋 Orders (Authenticated)</h3>
+            <div class="endpoint"><span class="method post">POST</span>/api/orders/place</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/orders/my-orders</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/orders/{id}</div>
+            <div class="endpoint"><span class="method delete">DELETE</span>/api/orders/{id}/cancel</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/admin/orders</div>
+            <div class="endpoint"><span class="method put">PUT</span>/api/admin/orders/{id}/status</div>
+        </div>
+        <div class="card">
+            <h3>💳 Payments</h3>
+            <div class="endpoint"><span class="method post">POST</span>/api/payment/create-order</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/payment/verify</div>
+        </div>
+        <div class="card">
+            <h3>⚙️ System</h3>
+            <div class="endpoint"><span class="method get">GET</span>/actuator/health</div>
+            <div class="endpoint"><span class="method get">GET</span>/actuator/info</div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>🛠️ Tech Stack</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Backend</h3>
+            <p>Java 17 + Spring Boot 3.2.3<br>Spring Security + JWT (JJWT 0.12.x)<br>Spring Data JPA + Hibernate<br>MySQL Database</p>
+        </div>
+        <div class="card">
+            <h3>Features</h3>
+            <p>Role-based access control (Admin/Customer)<br>Paginated product listings with filters<br>Shopping cart management<br>Order management with status tracking</p>
+        </div>
+        <div class="card">
+            <h3>Integrations</h3>
+            <p>Razorpay Payment Gateway<br>Local file storage for product images<br>Spring Boot Actuator for monitoring<br>BCrypt password encryption</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>FashionStore API &copy; 2024 | Built with ❤️ using Spring Boot 3.2 |
+        <a href="/actuator/health">Health Check</a>
+    </p>
+</footer>
+
+</body>
+</html>
