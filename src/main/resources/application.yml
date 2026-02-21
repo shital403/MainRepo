@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/fashionstore_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: password
+    url: ${DB_URL:jdbc:mysql://localhost:3306/fashionstore_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -22,14 +22,14 @@ spring:
 
 app:
   jwt:
-    secret: fashionStoreJwtSecretKey2024VeryLongSecretKeyForSecurityPurposes
-    expiration: 86400000  # 24 hours in ms
+    secret: ${JWT_SECRET:fashionStoreJwtSecretKey2024VeryLongSecretKeyForSecurityPurposes}
+    expiration: ${JWT_EXPIRATION:86400000}  # 24 hours in ms
 
 razorpay:
   key:
-    id: your_razorpay_key_id
-    secret: your_razorpay_key_secret
+    id: ${RAZORPAY_KEY_ID:your_razorpay_key_id}
+    secret: ${RAZORPAY_KEY_SECRET:your_razorpay_key_secret}
 
 file:
   upload:
-    dir: uploads/
+    dir: ${FILE_UPLOAD_DIR:uploads/}
